@@ -1,0 +1,10 @@
+<div>
+  <input type='text' [(ngModel)]='newTodo'>
+  <button (click)='addTodo()'>Add todo</button>
+
+  <ul>
+    <li *ngFor='let todo of todos'>
+      <todo-item [todo]='todo'></todo-item>
+    </li>
+  </ul>
+</div>
