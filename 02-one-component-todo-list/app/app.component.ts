@@ -10,7 +10,6 @@ export class MyApp {
   newTodo: string;
 
   addTodo () {
-    console.log(this.newTodo)
     if (this.newTodo) {
       this.todos.push(this.newTodo)
     }
