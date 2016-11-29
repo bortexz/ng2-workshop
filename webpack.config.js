@@ -14,6 +14,7 @@ module.exports = {
   },
   entry: {
     'polyfills': path.resolve(__dirname, "app/polyfills.ts"),
+    'vendor': path.resolve(__dirname, "app/vendor.ts"),
     'app': path.resolve(__dirname, "app/main.ts")
   },
   output: {
@@ -29,20 +30,19 @@ module.exports = {
       // Support for .ts files
       {
         test: /\.ts?$/,
-        loader: 'ts-loader',
+        loader: ['awesome-typescript-loader', 'angular2-template-loader'],
         include: [ path.resolve(__dirname, "./app") ]
       },
       // Support for .html as raw text
       {
         test: /\.html$/,
-        loader: 'raw-loader',
+        loader: 'html',
         exclude: [ path.resolve(__dirname, "index.html") ]
       }
     ]
   },
 
   plugins: [
-    // Generate the index.html
     new HtmlWebpackPlugin({ template: 'index.html' })
   ]
 }
