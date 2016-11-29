@@ -1,1 +1,1 @@
-# Angular 2 workshop code
+# Angular 2 workshop
