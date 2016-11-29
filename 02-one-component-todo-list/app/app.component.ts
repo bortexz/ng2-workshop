@@ -5,4 +5,15 @@ import {Component} from '@angular/core'
     templateUrl: './app.component.html'
 })
 
-export class MyApp {}
+export class MyApp {
+  todos = []
+  newTodo: string;
+
+  addTodo () {
+    console.log(this.newTodo)
+    if (this.newTodo) {
+      this.todos.push(this.newTodo)
+    }
+  }
+
+}
