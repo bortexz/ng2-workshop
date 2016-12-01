@@ -37,4 +37,45 @@ This is the interface of the HTTP class from the angular 2 source.
     head(url: string, options?: RequestOptionsArgs): Observable<Response>;
 ```
 
+## Using Http inside our app
+
+To use http inside our application, we first need to include it in the module:
+```typescript
+...
+import { HttpModule } from '@angular/http';
+
+@NgModule({
+  imports: [
+    ...
+    HttpModule
+  ],
+  declarations: [
+    MyApp
+  ],
+  providers: [
+  ],
+  bootstrap: [MyApp]
+})
+export class MyAppModule {
+
+}
+```
+
+Now, to use it inside a service, we can import `Http` from `@angular/http` and specify it to be injected into our service.
+
+```typescript
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+
+@Injectable()
+export class SpotifyService {
+  spotifyUrl: String = 'https://api.spotify.com/v1/search?type=artist&q=';
+  constructor (private http: Http) {}
+
+  public getArtistsByQuery (query) {
+    return this.http.get(`${this.spotifyUrl}${query}`).map(res => res.json())
+  }
+}
+```
+
 In this example, we will use the Spotify API to search artists by name. Also we will demonstrate how to use Observables to write a preview of results while typing.
