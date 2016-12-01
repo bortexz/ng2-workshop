@@ -1,0 +1,7 @@
+<div>
+  <input type='text' placeholder='search artist...' [formControl]='searchControl'>
+
+  <div *ngFor='let artist of artists | async'>
+    {{ artist.name }}
+  </div>
+</div>

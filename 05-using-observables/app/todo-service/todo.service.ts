@@ -11,7 +11,7 @@ export class TodoService {
 
   get todos () {
     return Observable
-      .of(this._todos)
-      .delay(2000)
+      .from(this._todos)
+      .toArray()
   }
 }
