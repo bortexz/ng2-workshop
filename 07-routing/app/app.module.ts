@@ -10,10 +10,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { ArtistsListComponent } from './artists-list/artists-list.component';
 import { ArtistProfileComponent } from './artist-profile/artist-profile.component';
 
+import { GetArtistResolver } from './spotify-service/get-artist.resolver';
+
 const routes: Routes = [
-  { path: '', redirectTo: 'artists', pathMatch: 'full' }
+  { path: '', redirectTo: 'artists', pathMatch: 'full' },
   { path: 'artists', component: ArtistsListComponent, children: [
-    {path: ':id', component: ArtistProfileComponent}
+    {path: ':id', component: ArtistProfileComponent, resolve: {artist: GetArtistResolver}}
   ]}
 ];
 
@@ -33,7 +35,8 @@ export const routing = RouterModule.forRoot(routes);
     ArtistProfileComponent
   ],
   providers: [
-    SpotifyService
+    SpotifyService,
+    GetArtistResolver
   ],
   bootstrap: [MyApp]
 })

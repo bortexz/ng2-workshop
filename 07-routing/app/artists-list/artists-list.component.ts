@@ -5,13 +5,15 @@ import { Observable } from 'rxjs'
 
 @Component({
   template: `
-    <input type='text' placeholder='search artist...' [formControl]='searchControl'>
+    <div>
+      <input type='text' placeholder='search artist...' [formControl]='searchControl' />
 
-    <div *ngFor='let artist of artists | async'>
-      {{ artist.name }}
+      <div *ngFor='let artist of artists | async'>
+        <a [routerLink]="['/artists', artist.id]">{{ artist.name }}</a>
+      </div>
+
+      <router-outlet></router-outlet>
     </div>
-
-    <router-outlet></router-outlet>
   `,
   selector: 'artists-list'
 })
@@ -25,5 +27,12 @@ export class ArtistsListComponent {
       .debounceTime(200)
       .switchMap(data => this.spotifyService.getArtistsByQuery(data))
       .map(data => data.artists.items)
+
+      this.searchControl.valueChanges
+      .filter(data => data.length > 2)
+      .debounceTime(200)
+      .switchMap(data => this.spotifyService.getArtistsByQuery(data))
+      .map(data => data.artists.items)
+      .subscribe(data => console.log(data))
   }
 }
