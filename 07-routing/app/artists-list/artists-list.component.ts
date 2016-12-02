@@ -27,12 +27,5 @@ export class ArtistsListComponent {
       .debounceTime(200)
       .switchMap(data => this.spotifyService.getArtistsByQuery(data))
       .map(data => data.artists.items)
-
-      this.searchControl.valueChanges
-      .filter(data => data.length > 2)
-      .debounceTime(200)
-      .switchMap(data => this.spotifyService.getArtistsByQuery(data))
-      .map(data => data.artists.items)
-      .subscribe(data => console.log(data))
   }
 }
